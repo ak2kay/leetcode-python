@@ -54,14 +54,12 @@ class Solution:
         if s is None or len(s) < 1:
             return 0
         length = len(s)
-        res = [0 for i in range(length)]
-        res[0] = 1
+        res = [1 for i in range(length)]
         for i in range(1, length):
             search_str = s[i-res[i-1]:i][::-1]
             if s[i] in search_str:
                 index = i - 1 - search_str.index(s[i])
-                delta = i - index  # 两个相同字符间的间隔
-                res[i] = delta
+                res[i] = i - index 
             else:
                 res[i] = res[i-1] + 1
 
