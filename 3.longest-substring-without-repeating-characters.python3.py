@@ -57,14 +57,13 @@ class Solution:
         res = [0 for i in range(length)]
         res[0] = 1
         for i in range(1, length):
-            search_str = s[:i][::-1]
+            search_str = s[i-res[i-1]:i][::-1]
             if s[i] in search_str:
                 index = i - 1 - search_str.index(s[i])
                 delta = i - index  # 两个相同字符间的间隔
-                if delta <= res[i-1]:
-                    res[i] = delta
-                    continue
-            res[i] = res[i-1] + 1
+                res[i] = delta
+            else:
+                res[i] = res[i-1] + 1
 
         return max(res)
 
