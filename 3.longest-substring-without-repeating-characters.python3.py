@@ -58,8 +58,7 @@ class Solution:
         for i in range(1, length):
             search_str = s[i-res[i-1]:i][::-1]
             if s[i] in search_str:
-                index = i - 1 - search_str.index(s[i])
-                res[i] = i - index 
+                res[i] = search_str.index(s[i]) + 1
             else:
                 res[i] = res[i-1] + 1
 
