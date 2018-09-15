@@ -74,8 +74,7 @@ class Solution:
             # deal with one number with all its dups
             while cur < length-1 and nums[cur] == nums[cur+1]:
                 cur += 1
-            if swap_index < cur:
-                self.swap(nums, swap_index, cur)
+            self.swap(nums, swap_index, cur)
             swap_index += 1
             cur += 1
 
