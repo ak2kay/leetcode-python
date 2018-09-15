@@ -28,7 +28,7 @@
 # Definition for singly-linked list.
 
 
-#class ListNode:
+# class ListNode:
 #    def __init__(self, x):
 #        self.val = x
 #        self.next = None
@@ -75,13 +75,13 @@ class Solution:
         return head
 
 
-#def print_linklist(head):
+# def print_linklist(head):
 #    while head:
 #        print(head.val, end=' ')
 #    print('')
 #
 #
-#if __name__ == "__main__":
+# if __name__ == "__main__":
 #    l1 = [2, 4, 3]
 #    l2 = [5, 6, 4]
 #    ex = Solution()
