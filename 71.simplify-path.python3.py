@@ -41,9 +41,6 @@ class Solution:
         :rtype: str
         """
 
-        if path is None or len(path) < 1:
-            return path
-
         path = path.split('/')
         stack = []
         jump = ('', '.', '..')
