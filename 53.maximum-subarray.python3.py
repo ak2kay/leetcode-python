@@ -40,8 +40,7 @@ class Solution:
 
         max_res = pre_res = nums[0]
         for i in range(1, length):
-                cur_res = nums[i] if pre_res <= 0 else nums[i] + pre_res
-                max_res = max(max_res, cur_res)
-                pre_res = cur_res
+                pre_res = nums[i] if pre_res <= 0 else nums[i] + pre_res
+                max_res = max(max_res, pre_res)
 
         return max_res
