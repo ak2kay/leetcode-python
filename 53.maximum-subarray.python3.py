@@ -37,12 +37,10 @@ class Solution:
         if len(nums) < 2:
             return sum(nums)
 
-        res = [0 for i in range(len(nums))]
-        res[0] = nums[0]
+        max_res = pre_res = nums[0]
         for i in range(1, len(nums)):
-                if res[i-1] <= 0:
-                    res[i] = nums[i]
-                else:
-                    res[i] = res[i-1] + nums[i]
+                cur_res = nums[i] if pre_res <= 0 else nums[i] + pre_res
+                max_res = max(max_res, cur_res)
+                pre_res = cur_res
 
-        return max(res)
+        return max_res
