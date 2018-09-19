@@ -34,11 +34,12 @@ class Solution:
         :type nums: List[int]
         :rtype: int
         """
-        if len(nums) < 2:
+        length = len(nums)
+        if length < 2:
             return sum(nums)
 
         max_res = pre_res = nums[0]
-        for i in range(1, len(nums)):
+        for i in range(1, length):
                 cur_res = nums[i] if pre_res <= 0 else nums[i] + pre_res
                 max_res = max(max_res, cur_res)
                 pre_res = cur_res
