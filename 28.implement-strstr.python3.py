@@ -46,16 +46,13 @@ class Solution:
         :type needle: str
         :rtype: int
         """
-        if not haystack and not needle:
-            return 0
-
         if not needle:
             return 0
 
-        if len(haystack) < len(needle):
+        len_h, len_n = len(haystack), len(needle)
+        if len_h < len_n:
             return -1
 
-        len_h, len_n = len(haystack), len(needle)
         next_arr = self.get_next_arr(needle, len_n)
         i = j = 0
         while i < len_h and j < len_n:
