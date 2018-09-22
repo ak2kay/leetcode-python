@@ -44,17 +44,19 @@ class Solution:
         nums.sort()
         
         for left in range(length-2):
-            if nums[left] > 0:
+            a = nums[left]
+            if a > 0:
                 break
-            if left > 0 and nums[left] == nums[left-1]:
+            if left > 0 and a == nums[left-1]:
                 continue
 
             middle = left + 1
             right = length - 1
             while middle < right:
-                cur_sum = nums[left] + nums[middle] + nums[right]
+                b, c = nums[middle], nums[right]
+                cur_sum = a + b + c
                 if cur_sum == 0:
-                    res.append([nums[left], nums[middle], nums[right]])
+                    res.append([a, b, c])
                     middle += 1
                     right -= 1
                     while middle < right and nums[middle] == nums[middle-1]:
