@@ -53,7 +53,7 @@ class Solution:
         if len_h < len_n:
             return -1
 
-        next_arr = self.get_next_arr(needle, len_n)
+        next_arr = self.get_next_arr(needle)
         i = j = 0
         while i < len_h and j < len_n:
             if haystack[i] == needle[j]:
@@ -66,7 +66,8 @@ class Solution:
 
         return i - j if j == len_n else -1
 
-    def get_next_arr(self, needle, len_n):
+    def get_next_arr(self, needle):
+        len_n = len(needle)
         if len_n == 1:
             return [-1]
         next_arr = [-1 for _ in range(len_n)]
