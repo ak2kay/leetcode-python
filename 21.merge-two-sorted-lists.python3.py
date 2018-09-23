@@ -32,12 +32,11 @@ class Solution:
         :type l2: ListNode
         :rtype: ListNode
         """
-        
         if l1 is None:
             return l2
-        if l2 is None:
+        elif l2 is None:
             return l1
-
+        
         if l1.val <= l2.val:
             head = l1
             l1 = l1.next
