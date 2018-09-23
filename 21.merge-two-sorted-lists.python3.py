@@ -38,11 +38,11 @@ class Solution:
         if l2 is None:
             return l1
 
-        head = l1 if l1.val <= l2.val else l2
-
-        if head ==  l1:
+        if l1.val <= l2.val:
+            head = l1
             l1 = l1.next
         else:
+            head = l2
             l2 = l2.next
 
         cur = head
