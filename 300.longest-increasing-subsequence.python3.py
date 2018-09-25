@@ -68,12 +68,11 @@ class Solution:
         high = length - 1
         while low <= high:
             middle = low + ((high - low) >> 1)
-            if max_v[middle] == num:
+            if max_v[middle] < num and max_v[middle+1] > num:
+                return middle
+            elif max_v[middle] == num:
                 return -1
             elif max_v[middle] > num:
                 high = middle - 1
-            elif max_v[middle+1] > num:
-                return middle
             else:
                 low = middle + 1
-
