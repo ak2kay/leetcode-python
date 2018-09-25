@@ -45,11 +45,10 @@ class Solution:
         i = 1
         while i < length:
             temp = nums[i]
-            max_length = 1
+            res[i] = 1
             for j in range(i-1, -1, -1):
                 if temp > nums[j]:
-                    max_length = max(max_length, res[j]+1)
-            res[i] = max_length
+                    res[i] = max(res[i], res[j]+1)
             i += 1
 
         return max(res)
