@@ -42,11 +42,14 @@ class Solution:
             return length
         
         res = [1 for i in range(length)]
-        for i in range(1, length):
+        i = 1
+        while i < length:
+            temp = nums[i]
             res[i] = 1
             for j in range(i-1, -1, -1):
-                if nums[i] > nums[j]:
+                if temp > nums[j]:
                     res[i] = max(res[i], res[j]+1)
+            i += 1
 
         return max(res)
 
