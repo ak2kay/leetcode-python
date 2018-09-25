@@ -49,19 +49,31 @@ class Solution:
 
         cur_max = 1
         for i in range(1, length):
-            for j in range(cur_max, -1, -1):
-                if nums[i] > max_v[j]:
-                    lis[i] = j + 1
-                    break
-            # 如果更新了当前最大值，那么更新max_v
-            if lis[i] > cur_max:
-                cur_max = lis[i]
-                max_v[cur_max] = nums[i]
-            # 如果没有更新最大值，那么找到可能被i更新的j
-            # 当nums[i] > max_v[j]也就是进入到了上面for循环中的if条件中
-            # 如果进入了条件中，那么如果nums[i]比原来max_v[j+1]小的时候才有
-            # 更新价值；
-            elif nums[i] > max_v[j] and nums[i] < max_v[j+1]:
-                max_v[j+1] = nums[i]
-        
+            index = self.get_index(max_v[:cur_max+1], nums[i])
+            if index >= 0:
+                max_v[index+1] = nums[i]
+                cur_max = max(cur_max, index+1)
+                
         return cur_max
+
+    def get_index(self, max_v, num):
+        length = len(max_v)
+
+        if num > max_v[-1]:
+            return length - 1
+        if num < max_v[0]:
+            return -1
+
+        low = 0
+        high = length - 1
+        while low <= high:
+            middle = low + ((high - low) >> 1)
+            if max_v[middle] == num:
+                return -1
+            elif max_v[middle] > num:
+                high = middle - 1
+            elif max_v[middle+1] > num:
+                return middle
+            else:
+                low = middle + 1
+
