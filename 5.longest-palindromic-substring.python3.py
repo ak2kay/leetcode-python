@@ -36,28 +36,29 @@ class Solution:
         """
         if s is None:
             return ''
+
         length = len(s)
         if length < 2:
             return s
         s = self.str_trans(s)
         length = len(s)
         res = [1 for i in range(length)]
-        i = 0
-        while i < length:
-            j, step = i, 1
-            while j-step > -1 and j+step < length and s[j-step] == s[j+step]:
-                res[i] += 2
-                step += 1
-            i += 1
-
+        right = c  = -1
+        for i in range(length):
+            res[i] = min(res[2*c-i], right-i) if right > i else 1
+            while i-res[i] > -1 and i+res[i] < length:
+                if s[i-res[i]] == s[i+res[i]]:
+                    res[i] += 1
+                else:
+                    break
+            res[i] -= 1
+            if i + res[i] > right:
+                right = i + res[i]
+                c = i
         lp = max(res)
         lp_index = res.index(lp)
-        lp = lp // 2
         lp = s[lp_index-lp:lp_index+lp+1]
         return lp.replace('#', '')
-
-
-
         
 
 
@@ -67,3 +68,13 @@ class Solution:
             s[i] = '#' + s[i]
         s.append('#')
         return ''.join(s)
+
+
+#def main():
+#    s = 'babad'
+#    ex = Solution()
+#    print(ex.longestPalindrome(s))
+#    
+#
+#if __name__ == "__main__":
+#    main()
