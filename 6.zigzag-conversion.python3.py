@@ -66,23 +66,18 @@ class Solution:
             max_delta = numRows * 2 - 2
             j = i
             res.append(s[j])
-            # 第一行或者最后一行没有斜坡元素
-            if i == 0 or i == numRows - 1:
-                while j + max_delta < length:
-                    res.append(s[j+max_delta])
-                    j += max_delta
-            else:
-                # next_must为当前打印行和第一行竖直对应的元素索引
-                next_must = j + max_delta
-                # next_cur为为斜坡元素
-                next_cur = next_must - 2 * i
-                while next_cur < length:
+            # next_must为当前打印行和第一行竖直对应的元素索引
+            next_must = j + max_delta
+            # next_cur为为斜坡元素
+            next_cur = next_must - 2 * i
+            while next_cur < length:
+                if next_cur != j and next_cur != next_must:
                     res.append(s[next_cur])
-                    if next_must < length:
-                        res.append(s[next_must])
-                    j += max_delta
-                    next_must = j + max_delta
-                    next_cur = next_must - i * 2
+                if next_must < length:
+                    res.append(s[next_must])
+                j += max_delta
+                next_must = j + max_delta
+                next_cur = next_must - i * 2
 
         return ''.join(res)
 
