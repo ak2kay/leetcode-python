@@ -62,15 +62,19 @@ class Solution:
 
         res = []
         for i in range(numRows):
+            # max_delta是打印第一行两个字符串之间的索引距离
             max_delta = numRows * 2 - 2
             j = i
             res.append(s[j])
+            # 第一行或者最后一行没有斜坡元素
             if i == 0 or i == numRows - 1:
                 while j + max_delta < length:
                     res.append(s[j+max_delta])
                     j += max_delta
             else:
+                # next_must为当前打印行和第一行竖直对应的元素索引
                 next_must = j + max_delta
+                # next_cur为为斜坡元素
                 next_cur = next_must - 2 * i
                 while next_cur < length:
                     res.append(s[next_cur])
