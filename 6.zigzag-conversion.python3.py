@@ -75,7 +75,7 @@ class Solution:
                     res.append(s[next_cur])
                 if next_must < length:
                     res.append(s[next_must])
-                j += max_delta
+                j = next_must
                 next_must = j + max_delta
                 next_cur = next_must - i * 2
 
