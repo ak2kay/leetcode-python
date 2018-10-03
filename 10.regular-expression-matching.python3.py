@@ -1,7 +1,7 @@
 #
-# [10] Regular Expression Matching
+# [10] Regular Expression isMatching
 #
-# https://leetcode.com/problems/regular-expression-isMatching/description/
+# https://leetcode.com/problems/regular-expression-isisMatching/description/
 #
 # algorithms
 # Hard (24.40%)
@@ -10,14 +10,14 @@
 # Testcase Example:  '"aa"\n"a"'
 #
 # Given an input string (s) and a p (p), implement regular expression
-# isMatching with support for '.' and '*'.
+# isisMatching with support for '.' and '*'.
 # 
 # 
-# '.' Matches any single character.
-# '*' Matches zero or more of the preceding element.
+# '.' isMatches any single character.
+# '*' isMatches zero or more of the preceding element.
 # 
 # 
-# The isMatching should cover the entire input string (not partial).
+# The isisMatching should cover the entire input string (not partial).
 # 
 # Note:
 # 
@@ -34,7 +34,7 @@
 # s = "aa"
 # p = "a"
 # Output: false
-# Explanation: "a" does not isMatch the entire string "aa".
+# Explanation: "a" does not isisMatch the entire string "aa".
 # 
 # 
 # Example 2:
@@ -66,7 +66,7 @@
 # p = "c*a*b"
 # Output: true
 # Explanation: c can be repeated 0 times, a can be repeated 1 time. Therefore
-# it isMatches "aab".
+# it isisMatches "aab".
 # 
 # 
 # Example 5:
@@ -80,17 +80,45 @@
 # 
 #
 # -*- coding:utf-8 -*-
-class Solution(object):
-    def isMatch(self, text, pattern):
-        dp = [[False] * (len(pattern) + 1) for _ in range(len(text) + 1)]
+from functools import lru_cache
 
-        dp[-1][-1] = True
-        for i in range(len(text), -1, -1):
-            for j in range(len(pattern) - 1, -1, -1):
-                first_match = i < len(text) and pattern[j] in {text[i], '.'}
-                if j+1 < len(pattern) and pattern[j+1] == '*':
-                    dp[i][j] = dp[i][j+2] or first_match and dp[i+1][j]
+
+class Solution:
+    # s, pattern都是字符串
+    @lru_cache()
+    def isMatch(self, s, pattern):
+        if len(s) == 0 and len(pattern) == 0:
+            return True
+        # 如果s长度不为0，而pattern长度为0，这种情况不可能匹配成功
+        elif len(s) != 0 and len(pattern) == 0:
+            return False
+        # 如果s长度为0， 而pattern长度不为0，那么可能会有pattern为'（.*）*'的情况
+        elif len(s) == 0 and len(pattern) != 0:
+            # 如果pattern第二位为0, pattern推进两个
+            if len(pattern) > 1 and pattern[1] == '*':
+                return self.isMatch(s, pattern[2:])
+            else:
+                return False
+        # 如果s和pattern长度都不为0
+        else:
+            # pattern第二位为*
+            if len(pattern) > 1 and pattern[1] == '*':
+                # 如果s[0] != pattern[0]
+                if s[0] !=  pattern[0] and pattern[0] != '.':
+                    return self.isMatch(s, pattern[2:])
+                # 如果s[0] == pattern[0], 那么有三种情况
+                    # 1. s不变，pattern后移两步（pattern前两个字符等价于空）
+                    # 2. s右移一个， pattern右移两个 （pattern前两个字符等价于一个字符）
+                    # 3. s右移一个， pattern不右移 （pattern前两个字符等价于多个字符)）
                 else:
-                    dp[i][j] = first_match and dp[i+1][j+1]
+                    return self.isMatch(s, pattern[2:]) or \
+                           self.isMatch(s[1:], pattern[2:]) or \
+                           self.isMatch(s[1:], pattern)
+            # pattern第二位不是*
+            else:
+                # 比较第一位的情况
+                if s[0] == pattern[0] or pattern[0] == '.':
+                    return self.isMatch(s[1:], pattern[1:])
+                else:
+                    return False
 
-        return dp[0][0]
