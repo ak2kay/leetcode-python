@@ -71,16 +71,16 @@ class Solution:
         cur_node = root
         while cur_node:
             if val < cur_node.val:
-                if not cur_node.left:
+                if cur_node.left:
+                    cur_node = cur_node.left
+                else:
                     cur_node.left = TreeNode(val)
                     return root
-                else:
-                    cur_node = cur_node.left
 
             if val > cur_node.val:
-                if not cur_node.right:
+                if cur_node.right:
+                    cur_node = cur_node.right
+                else:
                     cur_node.right = TreeNode(val)
                     return root
-                else:
-                    cur_node = cur_node.right
 
