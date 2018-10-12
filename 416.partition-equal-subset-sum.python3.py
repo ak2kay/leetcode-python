@@ -51,11 +51,10 @@ class Solution:
         if total % 2:
             return False
         v = total // 2
-        resList = [[False for i in range(v+1)] for j in range(len(nums)+1)]
-        for i in range(len(nums)+1):
-            resList[i][0] = True
+        resList = [False for i in range(v+1)]
+        resList[0] = True
 
         for i in range(1, len(nums)+1):
-            for j in range(nums[i-1], v+1):
-                resList[i][j] = resList[i-1][j] or resList[i-1][j-nums[i-1]]
-        return resList[len(nums)][v]
+            for j in range(v, nums[i-1]-1, -1):
+                resList[j] = resList[j] or resList[j-nums[i-1]]
+        return resList[v]
