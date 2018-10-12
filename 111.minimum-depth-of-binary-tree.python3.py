@@ -61,8 +61,6 @@ class Solution:
                     queue.append(temp.right)
                 cur_level -= 1
             level += 1
-
-
     
     def isLeaf(self, node):
         return not ( node.left or node.right)
