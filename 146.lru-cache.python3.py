@@ -75,7 +75,7 @@ class LRUCache:
             self._data[key] = value
             self._data.move_to_end(key)
 
-        if len(self._data) > self._cap:
+        while len(self._data) > self._cap:
             self._data.popitem(last=False)
         
 
