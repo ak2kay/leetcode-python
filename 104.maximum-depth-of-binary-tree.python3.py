@@ -43,12 +43,12 @@ class Solution:
         :type root: TreeNode
         :rtype: int
         """
-        if not root:
-            return 0
+        def dfs(node):
+            if not node:
+                return 0
+            l = dfs(node.left) + 1
+            r = dfs(node.right) + 1
 
-        depthLeft = self.maxDepth(root.left)
-        depthRight = self.maxDepth(root.right)
-
-        return max(depthLeft, depthRight) + 1
-
+            return max(l, r)
         
+        return dfs(root)
