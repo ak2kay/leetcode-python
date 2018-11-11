@@ -43,15 +43,11 @@ class Solution:
         :type root: TreeNode
         :rtype: int
         """
-
-        return self.getDepth(root)
-
-    def getDepth(self, root):
         if not root:
             return 0
 
-        depthLeft = self.getDepth(root.left)
-        depthRight = self.getDepth(root.right)
+        depthLeft = self.maxDepth(root.left)
+        depthRight = self.maxDepth(root.right)
 
         return max(depthLeft, depthRight) + 1
 
