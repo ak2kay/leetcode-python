@@ -41,9 +41,6 @@ class Solution:
         :rtype: List[int]
         """
         res = []
-        if root is None:
-            return res
-
         stack = []
         while root or stack:
             while root:
